@@ -1,4 +1,4 @@
 GradeBaker
 ==========
 
-Grade calculator web app... coming soon!
+(to be filled)
