@@ -1,87 +1,40 @@
-/* default categories */
-var assignments = new Category('assignments');
-var quizzes = new Category('quizzes');
-var midterms = new Category('midterms');
-var final = new Category('final');
-var defaultCats = new Array(assignments, quizzes, midterms, final);
-defaultCats.addCategories();
+var categories = (function () {
+    /* private properties */
+    var defaultItems = [['assignments','25'], ['quizzes', '25'], ['midterms', '25'], ['final', '25']];
+    var set = defaultItems;
+    function _createTag (item) {
+        console.log("_createTag: " + item[0] + ', ' + item[0]);
+        return '<tr class="category_input"><td><p>' + item[0] + '</p></td><td><input type="text" name="weight" value='+ item[1] +'></td></tr>';
+    }
+    function _addInputField (item) {
+        var tableNode = document.getElementById("input_table");
+        var inputTR = _createTag(item);
+        tableNode.innerHTML += inputTR;
+        console.log('_addInputField: ' + item[0] + ', ' + item[1]); 
+    }
 
-/* add categories to input table */
-var data = [
-    { value}
-]
-// Get the context of the canvas element we want to select
-var ctx = document.getElementById("char");.getContext("2d");
-var gbChart = new Chart(ctx).PolarArea(data);
+    /* public properties */
+    return {
+        init: (function (){
+                  console.log('init for ');
+                  for (i in defaultItems) { 
+                      _addInputField(defaultItems[i]);  
+                      console.log('init for ' + defaultItems[i]);
+                  }
+              })(),
 
-function createData (catList) {
-    var data = new Array();
-    for (i in catList) 
-        push.(catList[i].
-}
-Array.prototype.addCategories = function () {
-    for (i in this) 
-        this.addField(this[i]);
-}
-
-function addField (category) {
-    var inputTable = document.getElementById("input_table");
-    inputTable.innerHTML += category.inputTag;
-}
-
-
-/*function CategoryTable (catList) {
-    this.catList = catList;
-    this.addFields = function (this.catList) {
-        for ( i in catList) 
-            this.addField(catList[i]);
+            add : function (values) {   // values is [name, weight]
+                      set.push(values);
+                  },
+            size : function () {
+                       return set.length;
+                   },
     };
 
-    this.addField = function (category) {
-        var inputTable = document.getElementById("input_table");
-        inputTable.innerHTML += category.inputTag;
-    }
+}());
 
-
-}*/
-
-function Category (name, weight)  {
-    this.name = 'unnamed_category';
-    this.weight = '0';
-    this.inputTag =  
-        '<tr class="category_input"><td><p>' + this.name + '</p></td><td><input type="text" name="weight" value="0"></td></tr>';
-
-    this.setName = function (newName) { this.name = newName; };
-    this.getName = function () { this.name; };
-    this.setWeight = function (newWeight) { this.weight = newWeight; };
-    this.getWeight = function () { this.weight; };
+function addCategoryEvent() {
+    var tr =  '<tr class="category_input"><td><input type="text" name="name"></td><td><input type="text" name="weight"></td></tr>';
+    var tableNode = document.getElementById("input_table");
+    tableNode.innerHTML += tr;
 }
-
-function addPercents() {
-    var sum = 0;
-    var percents = document.getElementsByName("percent");
-    for (var i=0; i<percents.length; i++) {
-        var per = percents.item(i).value;
-        per = parseInt(per);
-        sum += per;
-    }
-    console.log(": " + sum);    // TODO - CONSOLE OUTPUT
-}
-
-function getCategories() {
-    var cat = document.getElementById("category").value;
-    console.log("result: " + cat);
-}
-
-function printInputs() {
-   var formElement = document.getElementById("form1");
-    var inputList = formElement.getElementsByTagName("input");
-    var inputs = [];
-    for (var i=0; i < inputList.length; i++) {
-        console.log(":" + inputList[i].value); // TODO - CONOSLE OUTPUT
-    }
-}
-
-  
-
-

@@ -1,59 +1,23 @@
 <html>
-    <body>
-        <h1>GradeBaker</h1>
-        <!-- INPUT FIELDS -->
-        <div>
-            <form id="ingredient_form">
-            <table id="ingredient_table">
-                <tr>
-                    <th>Category</th>
-                    <th>Percentage</th>
-                </tr>
-                <tr id="ingredient_item">
-                    <p></p>
-                    <td><input type="text" name="percent"></td>
-                </tr>
+   <body>
+      <h1>GradeBaker</h1>
+      <!-- INPUT FIELDS -->
+      <div>
+         <form id="ingredient_form">
+            <table id="input_table">
+               <tr>
+                  <th>Category</th>
+                  <th>Percentage</th>
+               </tr>
             </table>
-            </form>
-            <input type="button" value="Done" onclick="addPercents()" >
-        </div>
+         </form>
+      </div>
 
-    <!-- SUMMARY PART -->
-    
-    </body>
+      <input type="button" value="add" onclick="addCategoryEvent();">
+      <input type="button" value="Done" onclick="addPercents()" >
+      <!-- SUMMARY PART -->
 
-<script type="text/javascript">
-    
-    function addIngredient(var itemName) {
-        var itemElement = document.getElementById("ingredient_item");
+   </body>
 
-
-
-
-    }
-    function addPercents() {
-        var sum = 0;
-        var percents = document.getElementsByName("percent");
-        for (var i=0; i<percents.length; i++) {
-            var per = percents.item(i).value;
-            per = parseInt(per);
-            sum += per;
-        }
-        console.log(": " + sum);    // TODO - CONSOLE OUTPUT
-    }
-
-    function getCategories() {
-        var cat = document.getElementById("category").value;
-        console.log("result: " + cat);
-    }
-
-    function printInputs() {
-        var formElement = document.getElementById("form1");
-        var inputList = formElement.getElementsByTagName("input");
-        var inputs = [];
-        for (var i=0; i < inputList.length; i++) {
-            console.log(":" + inputList[i].value); // TODO - CONOSLE OUTPUT
-        }
-    }
-</script>
+   <script src="gradebaker.js"></script>
 </html>
