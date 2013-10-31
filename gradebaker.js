@@ -1,40 +1,65 @@
-var categories = (function () {
+var syllabusModule = (function () {
     /* private properties */
-    var defaultItems = [['assignments','25'], ['quizzes', '25'], ['midterms', '25'], ['final', '25']];
-    var set = defaultItems;
-    function _createTag (item) {
-        console.log("_createTag: " + item[0] + ', ' + item[0]);
-        return '<tr class="category_input"><td><p>' + item[0] + '</p></td><td><input type="text" name="weight" value='+ item[1] +'></td></tr>';
+    var defaultItem = [['assignments','25'], ['quizzes', '25'], ['midterms', '25'], ['final', '25']];
+    var category = {};
+
+    function _init () {
+        for (i in defaultItem) { 
+            var name = defaultItem[i][0];
+            var value = defaultItem[i][1];
+            category[name] = { 
+                weight : value,
+                tag : (function(){_createTag(name, value)})
+            }
+            _addInputField(name, value);
+        }
     }
-    function _addInputField (item) {
+
+    function _createTag (name, weight) {
+        return '<tr class="category_input"><td><p>' + name + '</p></td><td><input type="text" name='+name+' value='+ weight +' onchange="syllabusModule.setWeight(this.name,this.value)"></td></tr>';
+    }
+
+    function _addInputField (name, weight) {
         var tableNode = document.getElementById("input_table");
-        var inputTR = _createTag(item);
+        var inputTR = _createTag(name, weight);
         tableNode.innerHTML += inputTR;
-        console.log('_addInputField: ' + item[0] + ', ' + item[1]); 
+        console.log('_addInputField: ' +  name + ', ' + weight); 
     }
 
     /* public properties */
     return {
-        init: (function (){
-                  console.log('init for ');
-                  for (i in defaultItems) { 
-                      _addInputField(defaultItems[i]);  
-                      console.log('init for ' + defaultItems[i]);
-                  }
-              })(),
+            init : (function () {
+                _init();
+            })(),
 
-            add : function (values) {   // values is [name, weight]
-                      set.push(values);
-                  },
-            size : function () {
-                       return set.length;
-                   },
+             addCategory : function (values) {   // values is [name, weight]
+                 this.category[values[0]] = { 
+                     weight : values[1],
+                     tag : (function() {_createTag(values[0], values[1]); })
+                 }
+             },
+
+             size : function () {
+                 return set.length;
+             },
+
+             setWeight : function (name, newValue) {
+                console.log("testing setWeight: " + name + ', ' + newValue);
+                category[name].weight = newValue;
+                console.log("new value: " + category[name].weight);
+             }
     };
 
 }());
-
-function addCategoryEvent() {
+/* Event funtions */
+function addInputFieldEvent() {
     var tr =  '<tr class="category_input"><td><input type="text" name="name"></td><td><input type="text" name="weight"></td></tr>';
     var tableNode = document.getElementById("input_table");
     tableNode.innerHTML += tr;
+}
+
+/* Debugging functions */
+function printStats (set) {
+    for (i in set) 
+        console.log("printStats: " + i.toString());
 }
