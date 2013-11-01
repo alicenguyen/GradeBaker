@@ -1,23 +1,30 @@
 <html>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<style>
+body {
+   font-family: 'Source Sans Pro', sans-serif;
+   font-size: 24px;
+}
+</style>
 <body>
-<h1>GradeBaker</h1>
+<h1>gradebaker</h1>
 <!-- INPUT FIELDS -->
 <div>
    <form id="syllabus_form">
       <table>
          <thead>
-         <tr>
-            <th>Category</th>
-            <th>Percentage</th>
-         </tr>
-      </thead>
+            <tr>
+               <th>Category</th>
+               <th>Weight(%)</th>
+            </tr>
+         </thead>
          <tbody id="input_table">
          </tbody>
       </table>
    </form>
 </div>
 
-<input type="button" value="add" onclick="addInputFieldEvent();">
+<input type="button" value="add" onclick="addCategoryField();">
 <input type="button" value="Done" onclick="addPercents()" >
 <!-- SUMMARY PART -->
 

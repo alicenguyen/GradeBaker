@@ -32,11 +32,9 @@ var syllabusModule = (function () {
                 _init();
             })(),
 
-             addCategory : function (values) {   // values is [name, weight]
-                 this.category[values[0]] = { 
-                     weight : values[1],
-                     tag : (function() {_createTag(values[0], values[1]); })
-                 }
+             addCategory : function (name) {   // values is [name, weight]
+                 category[name] = { weight : 0 };
+                 this.printAll();
              },
 
              size : function () {
@@ -46,20 +44,37 @@ var syllabusModule = (function () {
              setWeight : function (name, newValue) {
                 console.log("testing setWeight: " + name + ', ' + newValue);
                 category[name].weight = newValue;
-                console.log("new value: " + category[name].weight);
+                console.log("post setWeight: category[" +name + "] weight=" + category[name].weight );
+             },
+
+             /* debugging functions */
+             printAll : function () {
+                var i = 0;
+                for ( k in category) {
+                    console.log("("+ i++ +"): " + k + ", " + category[k].weight);
+
+                }
              }
     };
 
 }());
+//var tr =  '<tr class="category_input"><td><input type="text" name="name"></td><td><input type="text" name="weight"></td></tr>';
 /* Event funtions */
-function addInputFieldEvent() {
-    var tr =  '<tr class="category_input"><td><input type="text" name="name"></td><td><input type="text" name="weight"></td></tr>';
+function addCategoryField() {
+    var tr =  '<tr class="category_input"><td><input type="text" onchange="categoryOnChange(this)"></td></tr>'
     var tableNode = document.getElementById("input_table");
     tableNode.innerHTML += tr;
 }
 
-/* Debugging functions */
-function printStats (set) {
-    for (i in set) 
-        console.log("printStats: " + i.toString());
+function addWeightField(cursor) {
+    var trW = '<td><input type="text" name="weight"></td>';
+    cursor.innterHTML += trW;
 }
+/* insert category into syllabusModule and create input field for weight after the user enters in a category*/
+function categoryOnChange (node) {
+    // update the name attribute in <tr> tag
+    node.name = node.value;
+    console.log("node update: " + node.name);
+    syllabusModule.addCategory(node.name);
+}
+
