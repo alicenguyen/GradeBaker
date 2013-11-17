@@ -1,4 +1,0 @@
-GradeBaker
-==========
-
-(to be filled)
