@@ -1,4 +1,16 @@
-gradebaker = (function () {
+/****************************************************************************/
+/* main (testing) */
+var midterm = new Category('midterm', 30);
+pc(midterm);
+
+midterm.addItem('m1', 30, 10);
+midterm.addItem('m2', 30, 20);
+pc(midterm);
+console.log(midterm.calculateGrade());
+
+
+
+/***************************************************************************/
 
 function Category( name, weight ) {
     this.name = name,
@@ -19,19 +31,46 @@ function Category( name, weight ) {
         for  (i in this.items)
             str += this.items[i].toString();
         return str;
+    },
+
+    this.calculateGrade = function (){
+        var scored = 0;
+        var total = 0;
+        for (i in this.items) {
+            var item = this.items[i]
+            if (item.isEntered()) {
+                scored += item.getScore();
+                total += item.maxPoints;
+            }
+        }
+        return (scored / total) * 100;
     }
+    
 }
 
 function Item ( name, maxPoints, earnedPoints) {
     this.name = name || 'name',
-    this.maxPoints = maxPoints || '100',
-    this.earnedPoints = earnedPoints || '100',
+    this.maxPoints = maxPoints || 'nil',
+    this.earnedPoints = earnedPoints || 'nil',
 
     this.toString = function () {
-        return this.name + ', ' + this.maxPoints + ', ' + this.earnedPoints;
+        return '[' + this.name + ', ' + this.maxPoints + ', ' +
+        this.earnedPoints + ', ' + this.isEntered()  + '] ';
+    },
+
+    this.isEntered = function () {
+        return this.earnedPoints !== 'nil';
+    }
+
+    this.getScore = function () {
+        return this.earnedPoints;
     }
 }
-});
+
+// test functions
+function pc(c) {
+    console.log(c.toString());
+}
 
 
 
