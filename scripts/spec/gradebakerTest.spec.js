@@ -21,6 +21,5 @@ function testCategoryProperties(name, weight, size) {
         });
         console.log(cat.toString());
     });
-
 }
 

@@ -1,3 +1,12 @@
+var midterm = new Category('midterm', 30);
+midterm.addItem('mid1', 20, 10);
+midterm.addItem('mid2', 25, 20);
+console.log(midterm.toString());
+console.log('calculated grade: ' + midterm.uGrade());
+
+/*****************************************************************************/
+/*****************************************************************************/
+
 function Category( name, weight ) {
     this.name = name,
     this.weight = weight,
@@ -15,18 +24,32 @@ function Category( name, weight ) {
         return str;
     },
 
-    this.calculateGrade = function (){
-        var scored = 0;
-        var total = 0;
-        for (i in this.items) {
-            var item = this.items[i]
-                if (item.isEntered()) {
-                    scored += item.getScore();
-                    total += item.maxPoints;
-                }
-        }
-        return (scored / total) * 100;
+    this.uGrade = function (){
+        var earned = this._sumScore();
+        var total = this._sumMaxPoints();
+        return ((earned/ total) * 100).toFixed(3);
     },
+
+    this.wGrade = function () {
+        return (this.weight )
+    },
+
+    this._sumScore = function () {
+        var scored = 0;
+        for ( i in this.items) {
+            var item = this.items[i];
+                if(item.isEntered() 
+                    scored += item.getScore();
+        }
+    }, 
+        this._sumMaxPoints = function () {
+        var maxpoints = 0;
+        for ( i in this.items) {
+            var item = this.items[i];
+                if(item.isEntered() 
+                    maxpoints += item.getScore();
+        }
+    }, 
 
     /* getters & setters */
     this.getName = function () {
@@ -69,4 +92,6 @@ exports.Item = function (name, maxPoints, earnedPoints) {
 exports.Category = function (name, weight) {
     return new Category(name, weight);
 };
+
+
 
