@@ -1,0 +1,30 @@
+Category
+    - int weight,
+    - list items
+
+     functions:
+        - addItem
+        - toString
+        - sumScore
+        - sumMaxPoints
+
+        - getName
+        - getSize
+        - getWeight
+
+Item
+    - string name
+    - int maxPoints
+    - int earnedPoints
+
+    functions:
+        - toString
+        - isEntered
+        - getScore
+        - getMaxPoints
+
+GradeCalc
+    - int value
+    functions: 
+        - letter 
+

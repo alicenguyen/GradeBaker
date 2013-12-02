@@ -8,6 +8,12 @@ var score = midterm.sumScore();
 var max = midterm.sumMaxPoints();
 console.log('grade value: ' + calc.value(score, max) + ' ' + calc.letter(score, max));
 
+// two categories
+var hw = new Category('hw', 20);
+hw.addItem('h1', 10, 15);
+console.log(hw.toString());
+
+
 
 /*****************************************************************************/
 /*****************************************************************************/
@@ -47,9 +53,7 @@ function Category( name, weight ) {
                     maxpoints += item.getMaxPoints();
             }
             return maxpoints
-        }, 
-
-    
+        },  
 
         /* getters & setters */
         this.getName = function () {
@@ -129,6 +133,5 @@ exports.Item = function (name, maxPoints, earnedPoints) {
 exports.Category = function (name, weight) {
     return new Category(name, weight);
 };
-
 
 
